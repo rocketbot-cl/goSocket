@@ -176,6 +176,8 @@ try:
         result = GetParams("result")
 
         try:
+            if not orderby:
+                orderby = False
 
             documents = mod_gos_session.getReceivedDocuments(nro, orderby, conToken_)
 
@@ -196,6 +198,9 @@ try:
         result = GetParams("result")
 
         try:
+            
+            if not orderby:
+                orderby = False
 
             documents = mod_gos_session.getSentDocuments(nro, orderby, conToken_)
 
