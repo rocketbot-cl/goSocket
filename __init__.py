@@ -129,8 +129,7 @@ class GoSocket_auth:
                 raise Exception("The API return null, check the document_id or the API data")
             if response.status_code == 500:
                 raise Exception("An error as ocurred")
-            print(response.text)
-            print(response.status_code)
+
             return response.content
             
 
