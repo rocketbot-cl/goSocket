@@ -29,6 +29,7 @@ import requests
 import traceback
 import io
 from requests.auth import HTTPBasicAuth
+import urllib.request
 
 base_path = tmp_global_obj["basepath"] #type: ignore
 cur_path = base_path + 'modules' + os.sep + 'GoSocket' + os.sep + 'libs' + os.sep
@@ -101,7 +102,13 @@ class GoSocket_auth:
             get_pdf = f'api/Mobile/DownloadPdf?documentId={doc_id}'
 
             response = session.get(self.goSocket_url + get_pdf)
-            print(response.headers)
+
+            if response.text == "null":
+                raise Exception("The API return null, check the document_id or the API data")
+            
+            if response.status_code == 500:
+                raise Exception("An error as ocurred")
+
             return response.content
         
         except Exception as e:
@@ -118,6 +125,12 @@ class GoSocket_auth:
 
             response = session.get(self.goSocket_url + get_xml)
 
+            if response.text == "null":
+                raise Exception("The API return null, check the document_id or the API data")
+            if response.status_code == 500:
+                raise Exception("An error as ocurred")
+            print(response.text)
+            print(response.status_code)
             return response.content
             
 
@@ -181,7 +194,6 @@ try:
 
             documents = mod_gos_session.getReceivedDocuments(nro, orderby, conToken_)
 
-
             SetVar(result, documents)
 
         except Exception as e:
@@ -225,21 +237,19 @@ try:
 
             if not path:
                 raise Exception("No se ingreso la ruta donde guardar el archivo")
-            
-            pdf = mod_gos_session.downloadPdf(doc)    
+             
 
             if format == 'PDF (.pdf)':
-                pdf = mod_gos_session.downloadPdf(doc)    
+                pdf = mod_gos_session.downloadPdf(doc)  
+                path_ = os.path.join(path, doc + '.pdf')
                 
-                path_ = os.path.join(path, doc+'.pdf')
-
                 with open(path_, 'wb') as pdf_file:
                     pdf_file.write(pdf)
-
+           
             else:
                 xml = mod_gos_session.downloadXml(doc)
+                path_ = os.path.join(path, doc + '.xml')  
 
-                path_ = os.path.join(path, doc+'.xml')  
                 with open(path_, 'wb') as xml_file:
                     xml_file.write(xml)
 
