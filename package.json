@@ -12,13 +12,11 @@
   "homepage": "http://rocketbot.com",
   "linux": true,
   "windows": true,
-  "mac": true,
-  "docker": true,
+  "mac": false,
+  "docker": false,
   "name": "GoSocket",
   "dependencies": {
-    "google-api-python-client": "2.108.0",
-    "google-auth-oauthlib": "1.1.0",
-    "google-auth": "2.23.4"
+
   },
   "title": {
     "en": "GoSocket",

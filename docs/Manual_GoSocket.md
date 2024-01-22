@@ -6,7 +6,6 @@
   
 This module allows you to connect to your GoSocket account. You will be able to obtain the documents received and sent; and download them in PDF or XML format.  
 
-  
 ![banner](imgs/ModuloGoSocket.png)
 ## How to install this module
   

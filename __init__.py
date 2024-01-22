@@ -24,12 +24,10 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 
 """
 import os
-import sys
 import requests
 import traceback
-import io
-from requests.auth import HTTPBasicAuth
-import urllib.request
+
+
 
 base_path = tmp_global_obj["basepath"] #type: ignore
 cur_path = base_path + 'modules' + os.sep + 'GoSocket' + os.sep + 'libs' + os.sep
